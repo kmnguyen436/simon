@@ -352,4 +352,6 @@ def simon():
             elif event.type == QUIT:
                 running = False
 
-simon()
+if __name__ == '__main__':
+    pygame.init()
+    simon()
