@@ -124,7 +124,7 @@ def simon():
     # clue action for one button
     def playSingleClue(btn):
         lightButton(btn)
-        pygame.time.delay(1000)
+        pygame.time.wait(700)
         clearButton()
         pygame.time.wait(300)
     # put all clue actions together to create a sequence
@@ -211,13 +211,13 @@ def simon():
             if btn == pattern[guessCounter]:
                 if guessCounter == progress:
                     if progress == len(pattern) - 1:
-                        roundCount(progress + 1)
+                        roundCount(progress)
                         winGame()
                     else:
                         progress += 1
                         roundCount(progress)
                         guessCounter = 0
-                        pygame.time.delay(600)
+                        pygame.time.wait(600)
                         playClueSequence()
                         clueHoldTime -= 60
                 else:
@@ -229,7 +229,7 @@ def simon():
                     loseGame()
                 else:
                     guessCounter = 0
-                    pygame.time.delay(600)
+                    pygame.time.wait(600)
                     playClueSequence()
         else:
             loseGame()
@@ -300,6 +300,7 @@ def simon():
         startRect1.center = (125, 125)
         screen.blit(start_text1, startRect1)
         pygame.display.flip()
+        reset()
         return False
     progress = 0
     running = True
@@ -309,7 +310,6 @@ def simon():
                 mouse_posx = pygame.mouse.get_pos()[0]
                 mouse_posy = pygame.mouse.get_pos()[1]
                 if 95 < mouse_posx < 155 and 107 < mouse_posy < 142 and not start:
-                    reset()
                     start = startPressed()
 
                 elif 95 < mouse_posx < 155 and 107 < mouse_posy < 142 and start:
@@ -331,16 +331,16 @@ def simon():
                         guess(2)
                 elif 347 < mouse_posx < 593 and 169 < mouse_posy < 413:
                     lightButton(3)
-                    pygame.time.wait(200)
+                    pygame.time.wait(100)
                     clearButton()
-                    pygame.time.wait(200)
+                    pygame.time.wait(100)
                     if start:
                         guess(3)
                 elif 347 < mouse_posx < 593 and 424 < mouse_posy < 665:
                     lightButton(4)
-                    pygame.time.wait(200)
+                    pygame.time.wait(100)
                     clearButton()
-                    pygame.time.wait(200)
+                    pygame.time.wait(100)
                     if start:
                         guess(4)
 
@@ -352,6 +352,4 @@ def simon():
             elif event.type == QUIT:
                 running = False
 
-if __name__ == '__main__':
-    pygame.init()
-    simon()
+simon()
